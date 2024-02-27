@@ -17,6 +17,7 @@ function App() {
               <Route path="/" element={<Inicio/>}/>
               <Route path="/detalleproducto" element={<DetalleProducto/>}/>
               <Route path="/administrador" element={<Administrador/>}/>
+              <Route path="/administrador/crear" element={<FormularioProducto/>}/>
               <Route path="*" element={<Error404/>}/>
             </Routes>
          <Footer/> 
