@@ -1,13 +1,34 @@
 import { Button, Table } from "react-bootstrap";
 import ItemProducto from "./producto/ItemProducto";
+import { useEffect, useState } from "react";
+import { leerProductos } from "../../helpers/queries"
+import { Link } from 'react-router-dom';
 
 
 const Administrador = () => {
+
+  const [productos, setProductos] = useState([]);
+
+  useEffect(()=>{
+    obtenerProductos(); 
+  }, [])
+
+  const obtenerProductos = async()=>{
+    const respuesta = await leerProductos();
+    if (respuesta.status === 200) {
+      const datos = await respuesta.json();
+      setProductos(datos);
+    }else{
+
+    }
+  }
+
+
   return (
     <section className="container mainSection">
       <div className="d-flex justify-content-between align-items-center mt-5">
         <h1 className="display-4 ">Productos disponibles</h1>
-        <Button className="btn btn-primary" >
+        <Button className="btn btn-primary" as={Link} to="/administrador/crear">
           <i className="bi bi-file-earmark-plus"></i>
         </Button>
       </div>
@@ -24,10 +45,9 @@ const Administrador = () => {
           </tr>
         </thead>
         <tbody>
-          <ItemProducto></ItemProducto>
-          <ItemProducto></ItemProducto>
-          <ItemProducto></ItemProducto>
-          <ItemProducto></ItemProducto>
+          {
+            productos.map((producto)=><ItemProducto key={producto.id} producto={producto}/>)
+          }
         </tbody>
       </Table>
     </section>
