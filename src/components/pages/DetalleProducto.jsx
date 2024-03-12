@@ -1,6 +1,28 @@
 import { Container, Card, Row, Col } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { useParams } from 'react-router-dom';
+import { obtenerProducto} from "../../helpers/queries";
 
 const DetalleProducto = () => {
+
+  const {id} = useParams()
+
+  const [productos, setProductos] = useState({});
+
+  useEffect(()=>{
+    obtenerDetalleProducto()
+  })
+
+  const obtenerDetalleProducto = async ()=>{
+    const respuesta = await obtenerProducto(id)
+    if (respuesta.status === 200) {
+      const datos = await respuesta.json()
+      setProductos(datos)
+    }else{
+      console.log("NO se obtuvieron datos.")
+    }
+  }
+
   return (
     <Container className="my-3 mainSection">
       <Card>
@@ -8,20 +30,20 @@ const DetalleProducto = () => {
           <Col md={6}>
             <Card.Img
               variant="top"
-              src="https://images.pexels.com/photos/414555/pexels-photo-414555.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              src={productos.imagen}
             />
           </Col>
           <Col md={6}>
             <Card.Body>
-              <Card.Title className="primary-font">Capuchino</Card.Title>
+              <Card.Title className="primary-font">{productos.nombreProducto}</Card.Title>
               <hr />
               <Card.Text>
-              El café americano es una bebida caliente que consiste en un espresso diluido con agua caliente, lo que resulta en una taza de café suave y aromático. Es una opción popular para aquellos que prefieren un café menos intenso que el espresso tradicional. Perfecto para disfrutar en cualquier momento del día.
+              {productos.descripcion_amplia}
               <br/>
               <br/>
-              <span className="primary-font fw-semibold ">Categoria:</span> Infusiones
+              <span className="primary-font fw-semibold ">Categoria:</span>{productos.categoria}
               <br className='mb-3'/>
-              <span className="primary-font fw-semibold ">Precio: $1000</span></Card.Text>
+              <span className="primary-font fw-semibold ">Precio: ${productos.precio}</span></Card.Text>
             </Card.Body>
           </Col>
         </Row>
