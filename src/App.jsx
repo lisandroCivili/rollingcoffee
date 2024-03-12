@@ -14,11 +14,11 @@ function App() {
   return <BrowserRouter>
          <Menu/>
             <Routes>
-              <Route path="/" element={<Inicio/>}/>
-              <Route path="/detalleproducto" element={<DetalleProducto/>}/>
-              <Route path="/administrador" element={<Administrador/>}/>
-              <Route path="/administrador/crear" element={<FormularioProducto/>}/>
-              <Route path="*" element={<Error404/>}/>
+              <Route exact path="/" element={<Inicio/>}/>
+              <Route exact path="/detalleproducto" element={<DetalleProducto/>}/>
+              <Route exact path="/administrador" element={<Administrador/>}/>
+              <Route exact path="/administrador/crear" element={<FormularioProducto/>}/>
+              <Route exact path="*" element={<Error404/>}/>
             </Routes>
          <Footer/> 
          </BrowserRouter>

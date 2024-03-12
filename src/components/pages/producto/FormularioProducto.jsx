@@ -4,6 +4,15 @@ import { useForm } from "react-hook-form";
 
 const FormularioProducto = () => {
 
+  const {
+    register,
+    handleSubmit,
+    formState: {errors},
+    reset,
+    setValue
+  } = useForm()
+
+
   return (
     <section className="container mainSection">
       <h1 className="display-4 mt-5">Nuevo producto</h1>

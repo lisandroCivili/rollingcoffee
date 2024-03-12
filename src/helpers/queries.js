@@ -8,3 +8,19 @@ export const leerProductos = async ()=>{
         console.log(error)
     }
 }
+
+export const crearProducto = async(nuevoProducto)=>{
+
+    try {
+        const respuesta = fetch(APIProductos, {
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(nuevoProducto)
+        })
+        return respuesta
+    } catch (error) {
+        console.log(error)
+    }
+}
