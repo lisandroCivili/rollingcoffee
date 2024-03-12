@@ -19,13 +19,13 @@
       "descripcion_amplia": "Nuestro jugo de naranja natural está hecho con naranjas frescas exprimidas a mano, sin adición de azúcares ni conservantes. Es una opción refrescante y saludable para acompañar tu desayuno o merienda."
     },
     {
-      "id": "7c67",
+      "id": "8df1",
       "nombreProducto": "Cafe",
       "precio": "500",
       "imagen": "https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg",
       "categoria": "Batidos",
-      "descripcion_breve": "Cafe con leche y mucha espuma",
-      "descripcion_amplia": "Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe "
+      "descripcion_breve": "Cafe con leche y mucha espuma.",
+      "descripcion_amplia": "Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe "
     }
   ]
 }
