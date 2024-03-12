@@ -24,3 +24,14 @@ export const crearProducto = async(nuevoProducto)=>{
         console.log(error)
     }
 }
+
+export const borrarProducto = async(id)=>{
+    try {
+        const respuesta = fetch(APIProductos+'/'+id,{
+            method: "DELETE"
+        })
+        return respuesta
+    } catch (error) {
+        console.log(error)
+    }
+}
