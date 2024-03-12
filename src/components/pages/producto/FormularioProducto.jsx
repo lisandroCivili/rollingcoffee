@@ -1,10 +1,11 @@
 import Swal from 'sweetalert2'
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { crearProducto } from '../../../helpers/queries';
+import { crearProducto, editarProducto, obtenerProducto } from '../../../helpers/queries';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
-
-const FormularioProducto = () => {
+const FormularioProducto = ({editando, titulo}) => {
 
   const {
     register,
@@ -14,30 +15,68 @@ const FormularioProducto = () => {
     setValue
   } = useForm()
 
+  const {id} = useParams();
 
-  // El parametro es un objeto que inventamos donde, si todo sale bien en el form, la libreria nos devuelve los datos ingresados
-  const datosValidados = async(producto)=>{ 
-    const respuesta = await crearProducto(producto);
-    if (respuesta.status === 201) {
-      Swal.fire({
-        title: "Producto creado",
-        text: `Se creo la receta de: ${producto.nombreProducto}`,
-        icon: "success"
-      });
-      reset()
+  useEffect(()=>{
+    cargarDatos()
+  },[])
+
+  const cargarDatos = async()=>{
+    const respuesta = await obtenerProducto(id)
+    if (respuesta.status === 200) {
+      const datos = await respuesta.json()
+      setValue('nombreProducto', datos.nombreProducto)
+      setValue('precio', datos.precio)
+      setValue('imagen', datos.imagen)
+      setValue('categoria', datos.categoria)
+      setValue('descripcion_breve', datos.descripcion_breve)
+      setValue('descripcion_amplia', datos.descripcion_amplia)
     }else{
-      Swal.fire({
-        title: "Ocurrio un error",
-        text: "No se puedo crear la receta, intente nuevamente en unos minutos.",
-        icon: "error"
-      });
+      console.log("No se obtuvieron datos")
     }
-  } 
+  }
+  
+  // El parametro es un objeto que inventamos donde, si todo sale bien en el form, la libreria nos devuelve los datos ingresados
+  const datosValidados = async(producto)=>{
+    if (editando) {
+      const respuesta = await editarProducto(producto, id)
+      if (respuesta.status === 200) {
+        Swal.fire({
+          title: "Edicion confirmada",
+          text: `El producto ${producto.nombreProducto} fue editado con exito.`,
+          icon: "success"
+        });
+      }else{
+        Swal.fire({
+          title: "No se pudo editar.",
+          text: "Por favor intentalo nuevamente en unos minutos.",
+          icon: "error"
+        });
+      }
+      }else{
+        const respuesta = await crearProducto(producto);
+        if (respuesta.status === 201) {
+          Swal.fire({
+            title: "Producto creado",
+            text: `Se creo la receta de: ${producto.nombreProducto}`,
+            icon: "success"
+          });
+          reset()
+        }else{
+          Swal.fire({
+            title: "Ocurrio un error",
+            text: "No se puedo crear la receta, intente nuevamente en unos minutos.",
+            icon: "error"
+          });
+        }
+      } 
+    }
+
 
 
   return (
     <section className="container mainSection">
-      <h1 className="display-4 mt-5">Nuevo producto</h1>
+      <h1 className="display-4 mt-5">{titulo}</h1>
       <hr />
       <Form className="my-4" onSubmit={handleSubmit(datosValidados)}>
         <Form.Group className="mb-3" controlId="formNombreProdcuto">
@@ -48,14 +87,14 @@ const FormularioProducto = () => {
             {...register("nombreProducto", {
               required: "El nombre del producto es obligatorio",
               minLength: {
-                value: 3,
+                value: 2,
                 message:
-                  "El nombre del producto debe tener como minimo 3 caracteres.",
+                  "El nombre del producto debe tener como minimo 2 caracteres.",
               },
               maxLength: {
-                value: 15,
+                value: 25,
                 message:
-                  "El nombre del producto debe tener como maximo 15 caracteres.",
+                  "El nombre del producto debe tener como maximo 25 caracteres.",
               },
             })}
           />

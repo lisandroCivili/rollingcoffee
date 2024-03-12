@@ -44,7 +44,7 @@ const ItemProducto = ({producto, setProductos}) => {
     <tr>
       <td className="text-center">{producto.id}</td>
       <td>{producto.nombreProducto}</td>
-      <td className="text-end">{producto.precio}</td>
+      <td className="text-end">${producto.precio}</td>
       <td className="text-center">
         <img
           src={producto.imagen}
@@ -54,9 +54,9 @@ const ItemProducto = ({producto, setProductos}) => {
       </td>
       <td>{producto.categoria}</td>
       <td className="text-center">
-        <Button variant="warning" className="me-lg-2">
+        <Link className="me-lg-2 btn btn-warning" to={'/administrador/editar/'+producto.id}>
           <i className="bi bi-pencil-square"></i>
-        </Button>
+        </Link>
         <Button variant="danger" onClick={eliminarProducto}>
           <i className="bi bi-trash"></i>
         </Button>
