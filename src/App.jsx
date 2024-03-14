@@ -10,6 +10,8 @@ import FormularioProducto from "./components/pages/producto/FormularioProducto";
 import DetalleProducto from "./components/pages/DetalleProducto";
 import Login from "./components/pages/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import RutasProtegidas from "./components/routes/RutasProtegidas";
+import RutasAdmin from "./components/routes/RutasAdmin";
 
 function App() {
   return <BrowserRouter>
@@ -18,9 +20,9 @@ function App() {
               <Route exact path="/" element={<Inicio/>}/>
               <Route exact path="/detalleproducto/:id" element={<DetalleProducto/>}/>
               <Route exact path="/login" element={<Login/>}/>
-              <Route exact path="/administrador" element={<Administrador/>}/>
-              <Route exact path="/administrador/crear" element={<FormularioProducto editando={false} titulo='Nuevo producto'/>}/>
-              <Route exact path="/administrador/editar/:id" element={<FormularioProducto editando={true} titulo='Editar producto'/>}/>
+              <Route exact path="/administrador/*" element={<RutasProtegidas>
+                  <RutasAdmin></RutasAdmin>
+              </RutasProtegidas>}/>
               <Route exact path="*" element={<Error404/>}/>
             </Routes>
          <Footer/> 

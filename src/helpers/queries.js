@@ -68,7 +68,7 @@ const userAdmin = {
 
 export const login = (usuario)=>{
     if (usuario.mail === userAdmin.email && usuario.pass === userAdmin.password) {
-        sessionStorage.setItem('loginRC', JSON.stringify(usuario.email))
+        sessionStorage.setItem('loginRC', JSON.stringify(usuario.mail))
         return true
     }else{
         return false

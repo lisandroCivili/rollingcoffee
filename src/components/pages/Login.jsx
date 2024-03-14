@@ -15,6 +15,7 @@ const Login = () => {
 
   const onSubmit = (usuario)=>{
     if (login(usuario)) {
+      console.log(usuario)
       Swal.fire({
         title: "Bienvenido",
         text: `Ingresaste al panel de administracion.`,
@@ -36,7 +37,7 @@ const Login = () => {
         <Form.Group className="mb-3" controlId="loginMail">
           <Form.Label>Correo electronico:</Form.Label>
           <Form.Control
-            type="mail"
+            type="email"
             placeholder="Ej: ejemplo@mail.com"
             {...register("mail", {
               required: "Ingrese un correo electronico.",
