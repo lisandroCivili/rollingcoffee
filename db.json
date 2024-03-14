@@ -10,13 +10,13 @@
       "descripcion_amplia": "Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe Cafe "
     },
     {
-      "id": "368e",
       "nombreProducto": "Brownie",
-      "precio": "1000",
+      "precio": "1500",
       "imagen": "https://images.pexels.com/photos/887853/pexels-photo-887853.jpeg",
       "categoria": "dulce",
       "descripcion_breve": "Brownie con chispas de chocolate blanco.",
-      "descripcion_amplia": "Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie "
+      "descripcion_amplia": "Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie Brownie ",
+      "id": "368e"
     },
     {
       "nombreProducto": "Té de manzanilla",

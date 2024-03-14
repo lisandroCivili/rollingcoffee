@@ -1,5 +1,8 @@
 import { Container, Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { login } from "../../helpers/queries";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const {
@@ -8,7 +11,23 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (datos)=>{
+  const navegacion = useNavigate()
+
+  const onSubmit = (usuario)=>{
+    if (login(usuario)) {
+      Swal.fire({
+        title: "Bienvenido",
+        text: `Ingresaste al panel de administracion.`,
+        icon: "success"
+      });
+      navegacion('/administrador')
+    }else{
+      Swal.fire({
+        title: "Ocurrio un error",
+        text: `Email o password incorrectos.`,
+        icon: "error"
+      });
+    }
   }
 
   return (
