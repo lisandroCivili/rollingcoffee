@@ -2,7 +2,7 @@ import Swal from 'sweetalert2'
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { crearProducto, editarProducto, obtenerProducto } from '../../../helpers/queries';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
 const FormularioProducto = ({editando, titulo}) => {
@@ -16,9 +16,11 @@ const FormularioProducto = ({editando, titulo}) => {
   } = useForm()
 
   const {id} = useParams();
-
+  const navegacion = useNavigate()
   useEffect(()=>{
-    cargarDatos()
+    if (editando) {
+      cargarDatos()
+    }
   },[])
 
   const cargarDatos = async()=>{
@@ -46,6 +48,7 @@ const FormularioProducto = ({editando, titulo}) => {
           text: `El producto ${producto.nombreProducto} fue editado con exito.`,
           icon: "success"
         });
+        navegacion('/administrador')
       }else{
         Swal.fire({
           title: "No se pudo editar.",

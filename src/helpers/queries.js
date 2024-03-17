@@ -59,3 +59,18 @@ export const editarProducto = async(nuevosDatosProducto, id)=>{
         console.log(error)
     }
 }
+
+//cuando tenga el backend se borra esta func.
+const userAdmin = {
+    email:"admin@lisandrocivili.com",
+    password: "123Aa$123"
+}
+
+export const login = (usuario)=>{
+    if (usuario.mail === userAdmin.email && usuario.pass === userAdmin.password) {
+        sessionStorage.setItem('loginRC', JSON.stringify(usuario.mail))
+        return true
+    }else{
+        return false
+    }
+}

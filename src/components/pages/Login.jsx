@@ -1,14 +1,35 @@
 import { Container, Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { login } from "../../helpers/queries";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({setUsuarioLogeado}) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (datos)=>{
+  const navegacion = useNavigate()
+
+  const onSubmit = (usuario)=>{
+    if (login(usuario)) {
+      console.log(usuario)
+      Swal.fire({
+        title: "Bienvenido",
+        text: `Ingresaste al panel de administracion.`,
+        icon: "success"
+      });
+      navegacion('/administrador')
+      setUsuarioLogeado(usuario.mail)
+    }else{
+      Swal.fire({
+        title: "Ocurrio un error",
+        text: `Email o password incorrectos.`,
+        icon: "error"
+      });
+    }
   }
 
   return (
@@ -17,7 +38,7 @@ const Login = () => {
         <Form.Group className="mb-3" controlId="loginMail">
           <Form.Label>Correo electronico:</Form.Label>
           <Form.Control
-            type="mail"
+            type="email"
             placeholder="Ej: ejemplo@mail.com"
             {...register("mail", {
               required: "Ingrese un correo electronico.",
