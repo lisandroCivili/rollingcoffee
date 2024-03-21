@@ -36,7 +36,7 @@ const Inicio = () => {
     
           <Row>
             {
-              productos.map((producto)=><CardProducto key={producto.id} producto={producto}/>)
+              productos.map((producto)=><CardProducto key={producto._id} producto={producto}/>)
             }
           </Row>
        
